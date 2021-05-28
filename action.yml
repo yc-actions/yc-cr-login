@@ -1,0 +1,13 @@
+name: 'Yandex Cloud CR "Login" Action for GitHub Actions'
+description: 'Logs in the local Docker client to YC CR'
+branding:
+  icon: 'cloud'
+  color: 'blue'
+inputs:
+  yc-sa-json-credentials:
+    description: 'Json containing authorized key for Service Account. More info https://cloud.yandex.ru/docs/container-registry/operations/authentication#sa-json'
+    required: true
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
+  post: 'dist/cleanup/index.js'

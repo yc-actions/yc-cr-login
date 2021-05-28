@@ -1,0 +1,36 @@
+{
+  "name": "yc-actions-yc-cr-login",
+  "version": "0.1.0",
+  "description": "Logs in the local Docker client to the Yandex Cloud account's Container Registry",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint **.js",
+    "package": "ncc build index.js -o dist && ncc build cleanup.js -o dist/cleanup",
+    "test": "eslint **.js && jest --coverage --verbose"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yc-actions/yc-cr-login.git"
+  },
+  "keywords": [
+    "Yandex.Cloud",
+    "GitHub",
+    "Actions",
+    "JavaScript"
+  ],
+  "author": "nikthespirit@yandex-team.ru",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yc-actions/yc-cr-login/issues"
+  },
+  "homepage": "https://github.com/yc-actions/yc-cr-login#readme",
+  "dependencies": {
+    "@actions/core": "^1.3.0",
+    "@actions/exec": "^1.0.4"
+  },
+  "devDependencies": {
+    "@zeit/ncc": "^0.22.3",
+    "eslint": "^7.27.0",
+    "jest": "^26.6.3"
+  }
+}
