@@ -25,7 +25,7 @@ Logs in the local Docker client to Yandex Cloud Container Registry.
       env:
         CR_REGISTRY: crp00000000000000000
         CR_REPOSITORY: my-cr-repo
-        MAGE_TAG: ${{ github.sha }}
+        IMAGE_TAG: ${{ github.sha }}
       run: |
         docker build -t cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:$IMAGE_TAG .
         docker push cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:$IMAGE_TAG
