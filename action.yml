@@ -8,6 +8,6 @@ inputs:
     description: 'Json containing authorized key for Service Account. More info https://cloud.yandex.ru/docs/container-registry/operations/authentication#sa-json'
     required: true
 runs:
-  using: 'node12'
+  using: 'node16'
   main: 'dist/index.js'
   post: 'dist/cleanup/index.js'
