@@ -6,6 +6,7 @@ jest.mock('@actions/core');
 jest.mock('@actions/exec');
 
 function mockGetInput(requestResponse) {
+    // noinspection JSUnusedLocalSymbols
     return function (name, options) { // eslint-disable-line no-unused-vars
         return requestResponse[name]
     }
@@ -14,6 +15,11 @@ function mockGetInput(requestResponse) {
 const DEFAULT_INPUTS = {
     'yc-sa-json-credentials': '{}',
 };
+
+const EMPTY_INPUT = {
+    'yc-sa-json-credentials': '',
+};
+
 
 describe('Login to CR', () => {
 
@@ -49,6 +55,18 @@ describe('Login to CR', () => {
         await run();
 
         expect(core.setFailed).toBeCalled();
+        expect(core.saveState).toHaveBeenCalledTimes(0);
+    });
+
+    test('empty input fails action', async () => {
+        core.getInput = jest
+            .fn()
+            .mockImplementation(mockGetInput(EMPTY_INPUT));
+        exec.exec.mockReturnValue(1);
+
+        await run();
+
+        expect(core.setFailed).toBeCalledWith("Empty credentials");
         expect(core.saveState).toHaveBeenCalledTimes(0);
     });
 
