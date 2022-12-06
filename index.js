@@ -4,6 +4,9 @@ const exec = require('@actions/exec');
 
 async function run() {
     const ycSaJsonCredentials = core.getInput('yc-sa-json-credentials', {required: true});
+    if (!ycSaJsonCredentials) {
+        core.setFailed("Empty credentials");
+    }
 
     try {
 
@@ -25,8 +28,9 @@ async function run() {
                 }
             });
 
-        if (exitCode != 0) {
+        if (exitCode !== 0) {
             core.debug(doLoginStdout);
+            // noinspection ExceptionCaughtLocallyJS
             throw new Error('Could not login: ' + doLoginStderr);
         }
 
