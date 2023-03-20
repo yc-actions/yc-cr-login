@@ -7,6 +7,10 @@ inputs:
   yc-sa-json-credentials:
     description: 'Json containing authorized key for Service Account. More info https://cloud.yandex.ru/docs/container-registry/operations/authentication#sa-json'
     required: true
+  cr-endpoint:
+    required: false
+    description: 'Cloud API endpoint'
+    default: 'cr.yandex'
 runs:
   using: 'node16'
   main: 'dist/index.js'

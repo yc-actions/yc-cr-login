@@ -8,13 +8,15 @@ async function run() {
         core.setFailed("Empty credentials");
     }
 
+    const cr = core.getInput('cr-endpoint', {required: false}) || 'cr.yandex';
+
     try {
 
         // Execute the docker login command
         let doLoginStdout = '';
         let doLoginStderr = '';
         const exitCode = await exec.exec('docker login',
-            ['--username', 'json_key', '--password-stdin', 'cr.yandex'], {
+            ['--username', 'json_key', '--password-stdin', cr], {
                 silent: true,
                 ignoreReturnCode: true,
                 input: Buffer.from(ycSaJsonCredentials),
