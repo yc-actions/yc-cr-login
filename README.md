@@ -19,7 +19,7 @@ Logs in the local Docker client to Yandex Cloud Container Registry.
 ```yaml
     - name: Login to Yandex Cloud Container Registry
       id: login-cr
-      uses: yc-actions/yc-cr-login@v1
+      uses: yc-actions/yc-cr-login@v2
       with:
         yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
 
