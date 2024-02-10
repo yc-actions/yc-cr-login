@@ -2,7 +2,7 @@
   "name": "yc-actions-yc-cr-login",
   "version": "2.0.0",
   "description": "Logs in the local Docker client to the Yandex Cloud account's Container Registry",
-  "main": "dist/index.js",
+  "main": "dist/main/index.js",
   "scripts": {
     "bundle": "npm run format:write && npm run package",
     "ci-test": "jest",
@@ -10,7 +10,7 @@
     "format:write": "prettier --write **/*.ts",
     "format:check": "prettier --check **/*.ts",
     "lint": "npx eslint . -c .eslintrc.yml",
-    "package": "ncc build src/index.ts --license licenses.txt",
+    "package": "ncc build src/index.ts -o dist/main --license licenses.txt && ncc build src/cleanup.ts -o dist/cleanup",
     "package:watch": "npm run package -- --watch",
     "test": "jest",
     "all": "npm run format:write && npm run lint && npm run test && npm run coverage && npm run package",

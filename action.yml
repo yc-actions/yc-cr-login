@@ -13,5 +13,5 @@ inputs:
     default: 'cr.yandex'
 runs:
   using: 'node20'
-  main: 'dist/main.ts'
-  post: 'dist/cleanup/main.ts'
+  main: 'dist/main/index.js'
+  post: 'dist/cleanup/index.js'
