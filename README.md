@@ -1,5 +1,7 @@
 ## YC CR "Login" Action for GitHub Actions
 
+[![Coverage](./badges/coverage.svg)](./badges/coverage.svg)
+
 Logs in the local Docker client to Yandex Cloud Container Registry.
 
 **Table of Contents**
@@ -17,7 +19,7 @@ Logs in the local Docker client to Yandex Cloud Container Registry.
 ```yaml
     - name: Login to Yandex Cloud Container Registry
       id: login-cr
-      uses: yc-actions/yc-cr-login@v1
+      uses: yc-actions/yc-cr-login@v2
       with:
         yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
 
@@ -36,7 +38,6 @@ See [action.yml](action.yml) for the full documentation for this action's inputs
 ## Permissions
 
 This action requires the following minimum set of permissions:
-
 
 ## License Summary
 
