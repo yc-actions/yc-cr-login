@@ -1,21 +1,4 @@
 pull_request_rules:
-  - name: Automatically merge on CI success and review approval
-    conditions:
-      - base~=master|integ-tests
-      - "#approved-reviews-by>=1"
-      - -approved-reviews-by~=author
-      - status-success=Run Unit Tests
-      - status-success=Semantic Pull Request
-      - label!=work-in-progress
-      - -title~=(WIP|wip)
-      - -merged
-      - -closed
-      - author!=dependabot[bot]
-    actions:
-      merge:
-        method: squash
-        strict: smart
-        strict_method: merge
 
   - name: Automatically approve and merge Dependabot PRs
     conditions:
@@ -31,6 +14,6 @@ pull_request_rules:
       review:
         type: APPROVE
       merge:
+        merge_bot_account: nikolaymatrosov
         method: squash
-        strict: smart+fasttrack
-        strict_method: merge
+
