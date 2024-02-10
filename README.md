@@ -1,5 +1,7 @@
 ## YC CR "Login" Action for GitHub Actions
 
+[![Coverage](./badges/coverage.svg)](./badges/coverage.svg)
+
 Logs in the local Docker client to Yandex Cloud Container Registry.
 
 **Table of Contents**
@@ -36,7 +38,6 @@ See [action.yml](action.yml) for the full documentation for this action's inputs
 ## Permissions
 
 This action requires the following minimum set of permissions:
-
 
 ## License Summary
 
