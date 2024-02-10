@@ -37,7 +37,9 @@ See [action.yml](action.yml) for the full documentation for this action's inputs
 
 ## Permissions
 
-This action requires the following minimum set of permissions:
+This action does not require any specific permissions. But to push images to the Yandex Cloud Container Registry, 
+the service account used for the action should have the `container-registry.images.pusher` 
+[permission](https://cloud.yandex.ru/en/docs/container-registry/security/).
 
 ## License Summary
 
