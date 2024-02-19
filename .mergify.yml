@@ -2,10 +2,10 @@ pull_request_rules:
 
   - name: Automatically approve and merge Dependabot PRs
     conditions:
-      - base=master
+      - base=main
       - author=dependabot[bot]
-      - status-success=Run Unit Tests
-      - status-success=Semantic Pull Request
+      - check-success=check-dist
+      - check-success=build
       - -title~=(WIP|wip)
       - -label~=(blocked|do-not-merge)
       - -merged
@@ -14,6 +14,5 @@ pull_request_rules:
       review:
         type: APPROVE
       merge:
-        merge_bot_account: nikolaymatrosov
         method: squash
 
