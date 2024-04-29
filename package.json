@@ -38,7 +38,7 @@
     "@actions/exec": "^1.1.1",
     "@yandex-cloud/nodejs-sdk": "^2.7.3",
     "@grpc/grpc-js": "^1.10.6",
-    "yaml": "^2.4.1"
+    "yaml": "^2.4.2"
   },
   "devDependencies": {
     "@types/jest": "^29.5.11",
