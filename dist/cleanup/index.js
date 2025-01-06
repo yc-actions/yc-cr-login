@@ -25636,59 +25636,26 @@ module.exports = {
 /***/ }),
 
 /***/ 1730:
-/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
 
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || (function () {
-    var ownKeys = function(o) {
-        ownKeys = Object.getOwnPropertyNames || function (o) {
-            var ar = [];
-            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
-            return ar;
-        };
-        return ownKeys(o);
-    };
-    return function (mod) {
-        if (mod && mod.__esModule) return mod;
-        var result = {};
-        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
-        __setModuleDefault(result, mod);
-        return result;
-    };
-})();
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.run = run;
 exports.cleanup = cleanup;
-const exec = __importStar(__nccwpck_require__(5236));
-const core = __importStar(__nccwpck_require__(7484));
+const exec_1 = __nccwpck_require__(5236);
+const core_1 = __nccwpck_require__(7484);
 async function run() {
-    const ycSaJsonCredentials = core.getInput('yc-sa-json-credentials', { required: true });
+    const ycSaJsonCredentials = (0, core_1.getInput)('yc-sa-json-credentials', { required: true });
     if (!ycSaJsonCredentials) {
-        core.setFailed('Empty credentials');
+        (0, core_1.setFailed)('Empty credentials');
     }
-    const cr = core.getInput('cr-endpoint', { required: false }) || 'cr.yandex';
+    const cr = (0, core_1.getInput)('cr-endpoint', { required: false }) || 'cr.yandex';
     try {
         // Execute the docker login command
         let doLoginStdout = '';
         let doLoginStderr = '';
-        const exitCode = await exec.exec('docker login', ['--username', 'json_key', '--password-stdin', cr], {
+        const exitCode = await (0, exec_1.exec)('docker login', ['--username', 'json_key', '--password-stdin', cr], {
             silent: true,
             ignoreReturnCode: true,
             input: Buffer.from(ycSaJsonCredentials),
@@ -25702,14 +25669,14 @@ async function run() {
             }
         });
         if (exitCode !== 0) {
-            core.debug(doLoginStdout);
+            (0, core_1.debug)(doLoginStdout);
             // noinspection ExceptionCaughtLocallyJS
             throw new Error(`Could not login: ${doLoginStderr}`);
         }
     }
-    catch (error) {
-        if (error instanceof Error) {
-            core.setFailed(error.message);
+    catch (err) {
+        if (err instanceof Error) {
+            (0, core_1.setFailed)(err.message);
         }
     }
 }
@@ -25719,11 +25686,11 @@ async function run() {
  */
 async function cleanup() {
     try {
-        core.debug(`Logging out registry`);
+        (0, core_1.debug)(`Logging out registry`);
         // Execute the docker logout command
         let doLogoutStdout = '';
         let doLogoutStderr = '';
-        const exitCode = await exec.exec('docker logout', ['cr.yandex'], {
+        const exitCode = await (0, exec_1.exec)('docker logout', ['cr.yandex'], {
             silent: true,
             ignoreReturnCode: true,
             listeners: {
@@ -25736,14 +25703,14 @@ async function cleanup() {
             }
         });
         if (exitCode !== 0) {
-            core.debug(doLogoutStdout);
-            core.error(`Could not logout registry: ${doLogoutStderr}`);
+            (0, core_1.debug)(doLogoutStdout);
+            (0, core_1.error)(`Could not logout registry: ${doLogoutStderr}`);
             throw new Error(`Failed to logout}`);
         }
     }
-    catch (error) {
-        if (error instanceof Error) {
-            core.setFailed(error.message);
+    catch (err) {
+        if (err instanceof Error) {
+            (0, core_1.setFailed)(err.message);
         }
     }
 }
