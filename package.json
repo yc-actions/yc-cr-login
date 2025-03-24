@@ -36,7 +36,7 @@
     "@actions/core": "^1.11.1",
     "@actions/exec": "^1.1.1",
     "@actions/github": "^6.0.0",
-    "@grpc/grpc-js": "^1.13.0",
+    "@grpc/grpc-js": "^1.13.1",
     "@yandex-cloud/nodejs-sdk": "^2.8.0",
     "yaml": "^2.7.0"
   },
