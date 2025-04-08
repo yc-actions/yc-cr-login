@@ -1,4 +1,4 @@
-// eslint-disable-next-line importPlugin/no-namespace
+// eslint-disable-next-line import/no-namespace
 import * as core from '@actions/core'
 import { exec } from '@actions/exec'
 
