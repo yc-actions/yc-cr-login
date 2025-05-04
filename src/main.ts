@@ -25,7 +25,8 @@ export async function run(): Promise<void> {
         username = 'iam'
         password = saToken
     } else {
-        throw new Error('No credentials')
+        setFailed('Empty credentials')
+        return
     }
 
     const cr = getInput('cr-endpoint', { required: false }) || 'cr.yandex'
