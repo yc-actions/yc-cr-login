@@ -1,10 +1,31 @@
 import { exec } from '@actions/exec'
-import { getInput, setFailed, debug, error } from '@actions/core'
+import { debug, error, getIDToken, getInput, info, setFailed } from '@actions/core'
+import axios from 'axios'
 
 export async function run(): Promise<void> {
-    const ycSaJsonCredentials = getInput('yc-sa-json-credentials', { required: true })
-    if (!ycSaJsonCredentials) {
-        setFailed('Empty credentials')
+    let username: string
+    let password: string
+    const ycSaJsonCredentials = getInput('yc-sa-json-credentials')
+    const ycIamToken = getInput('yc-iam-token')
+    const ycSaId = getInput('yc-sa-id')
+    if (ycSaJsonCredentials !== '') {
+        info('Parsed Service account JSON')
+        username = 'json_key'
+        password = ycSaJsonCredentials
+    } else if (ycIamToken !== '') {
+        username = 'iam'
+        password = ycIamToken
+        info('Using IAM token')
+    } else if (ycSaId !== '') {
+        const ghToken = await getIDToken()
+        if (!ghToken) {
+            throw new Error('No credentials provided')
+        }
+        const saToken = await exchangeToken(ghToken, ycSaId)
+        username = 'iam'
+        password = saToken
+    } else {
+        throw new Error('No credentials')
     }
 
     const cr = getInput('cr-endpoint', { required: false }) || 'cr.yandex'
@@ -13,10 +34,10 @@ export async function run(): Promise<void> {
         // Execute the docker login command
         let doLoginStdout = ''
         let doLoginStderr = ''
-        const exitCode = await exec('docker login', ['--username', 'json_key', '--password-stdin', cr], {
+        const exitCode = await exec('docker login', ['--username', username, '--password-stdin', cr], {
             silent: true,
             ignoreReturnCode: true,
-            input: Buffer.from(ycSaJsonCredentials),
+            input: Buffer.from(password),
             listeners: {
                 stdout: data => {
                     doLoginStdout += data.toString()
@@ -74,4 +95,31 @@ export async function cleanup(): Promise<void> {
             setFailed(err.message)
         }
     }
+}
+
+async function exchangeToken(token: string, saId: string): Promise<string> {
+    info(`Exchanging token for service account ${saId}`)
+    const res = await axios.post(
+        'https://auth.yandex.cloud/oauth/token',
+        {
+            grant_type: 'urn:ietf:params:oauth:grant-type:token-exchange',
+            requested_token_type: 'urn:ietf:params:oauth:token-type:access_token',
+            audience: saId,
+            subject_token: token,
+            subject_token_type: 'urn:ietf:params:oauth:token-type:id_token'
+        },
+        {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }
+    )
+    if (res.status !== 200) {
+        throw new Error(`Failed to exchange token: ${res.status} ${res.statusText}`)
+    }
+    if (!res.data.access_token) {
+        throw new Error(`Failed to exchange token: ${res.data.error} ${res.data.error_description}`)
+    }
+    info(`Token exchanged successfully`)
+    return res.data.access_token
 }
