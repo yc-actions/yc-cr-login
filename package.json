@@ -39,7 +39,7 @@
     "@grpc/grpc-js": "^1.13.4",
     "@yandex-cloud/nodejs-sdk": "^2.9.0",
     "yaml": "^2.8.0",
-    "axios": "^1.9.0"
+    "axios": "^1.10.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
