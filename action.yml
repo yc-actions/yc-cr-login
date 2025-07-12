@@ -5,8 +5,14 @@ branding:
   color: 'blue'
 inputs:
   yc-sa-json-credentials:
+    required: false
     description: 'Json containing authorized key for Service Account. More info https://cloud.yandex.ru/docs/container-registry/operations/authentication#sa-json'
-    required: true
+  yc-iam-token:
+    required: false
+    description: 'Token that can be used to authenticate in Yandex Container Registry. More info https://yandex.cloud/ru/docs/iam/concepts/authorization/iam-token'
+  yc-sa-id:
+    required: false
+    description: 'Service account id to authorize using service account federation. More info https://yandex.cloud/ru/docs/iam/tutorials/wlif-github-integration'
   cr-endpoint:
     required: false
     description: 'Cloud API endpoint'
