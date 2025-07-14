@@ -1,6 +1,6 @@
 {
   "name": "yc-actions-yc-cr-login",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Logs in the local Docker client to the Yandex Cloud account's Container Registry",
   "main": "dist/main/index.js",
   "scripts": {
