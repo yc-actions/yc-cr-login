@@ -18,6 +18,6 @@ inputs:
     description: 'Cloud API endpoint'
     default: 'cr.yandex'
 runs:
-  using: 'node20'
+  using: 'node24'
   main: 'dist/main/index.js'
   post: 'dist/cleanup/index.js'
