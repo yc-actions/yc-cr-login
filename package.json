@@ -38,7 +38,7 @@
     "@actions/github": "^6.0.1",
     "@grpc/grpc-js": "^1.14.2",
     "@yandex-cloud/nodejs-sdk": "^2.9.0",
-    "axios": "1.13.1",
+    "axios": "1.13.2",
     "yaml": "^2.8.2"
   },
   "devDependencies": {
